@@ -1,0 +1,53 @@
+@import url("/css/icons.css");
+
+:root {
+  --fg-color: rgb(16, 15, 15);
+  --bg-color: rgb(255, 252, 240);
+  --link-color: #3022ca;
+}
+
+.dark {
+  --fg-color: rgb(206, 205, 195);
+  --bg-color: rgb(16, 15, 15);
+  --link-color: #8ab4f8;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+body {
+  max-width: 800px;
+  margin: 0 auto;
+  color: var(--fg-color);
+  background-color: var(--bg-color);
+  font-family: "Noto Sans", sans-serif;
+  transition: color 0.3s, background-color 0.3s;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 500;
+  font-family: "Noto Serif", serif;
+}
+
+main {
+  padding: 0 1rem;
+}
+
+a {
+  color: var(--link-color);
+  transition: color 0.3s;
+}
+
+ul {
+  margin-block-start: 0.5rem;
+  padding-inline-start: 1.5rem;
+}

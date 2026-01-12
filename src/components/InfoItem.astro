@@ -1,0 +1,69 @@
+---
+interface Props {
+  title: string;
+  location: string;
+  year: string | { begin: string; end: string };
+  description: string;
+}
+
+const { title, location, year, description } = Astro.props;
+---
+
+<article>
+  <h3 class="title">{title}</h3>
+  <p class="location">{location}</p>
+  <h4 class="year">
+    {typeof year === "string" ? year : `${year.begin} \u2014 ${year.end}`}
+  </h4>
+  <p class="description">{description}</p>
+</article>
+
+<style>
+  article {
+    display: grid;
+    grid-template-areas:
+      "title year"
+      "description location";
+  }
+
+  .title {
+    grid-area: title;
+    margin: 0;
+  }
+
+  .location {
+    grid-area: location;
+    margin: 0;
+    font-style: italic;
+    text-align: right;
+  }
+
+  .year {
+    grid-area: year;
+    margin: 0;
+    text-align: right;
+  }
+
+  .description {
+    grid-area: description;
+    margin-top: 0.3rem;
+  }
+
+  h3,
+  h4 {
+    margin: 0;
+  }
+
+  @media (max-width: 600px) {
+    article {
+      grid-template-areas:
+        "title title"
+        "location year"
+        "description description";
+    }
+
+    .location {
+      text-align: left;
+    }
+  }
+</style>
