@@ -1,0 +1,63 @@
+---
+interface Props {
+  data: {
+    organization: string;
+    position: string;
+    date: { begin: string; end: string };
+    location: string;
+    description: string[];
+  };
+}
+
+const { organization, position, date, location, description } =
+  Astro.props.data;
+---
+
+<article>
+  <div class="item-header">
+    <div>
+      <h3>{organization}</h3>
+      <h4>{position}</h4>
+    </div>
+    <div class="date-location">
+      <span class="date">{date.begin} &mdash; {date.end}</span>
+      <span class="location">{location}</span>
+    </div>
+  </div>
+  <ul>
+    {description.map((d) => <li>{d}</li>)}
+  </ul>
+</article>
+
+<style>
+  .item-header {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 1rem;
+
+    @media (max-width: 600px) {
+      grid-template-columns: auto;
+      gap: 0.3rem;
+    }
+  }
+
+  h3,
+  h4 {
+    margin: 0;
+  }
+
+  .date-location {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: right;
+
+    @media (max-width: 600px) {
+      text-align: left;
+    }
+  }
+
+  .location {
+    font-style: italic;
+  }
+</style>

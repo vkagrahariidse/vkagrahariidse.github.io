@@ -1,0 +1,94 @@
+---
+import HomeLayout from "../layouts/HomeLayout.astro";
+import Header from "../components/Header.astro";
+import experience from "../data/experience";
+import ExperienceItem from "../components/ExperienceItem.astro";
+import skills from "../data/skills";
+import awards from "../data/awards";
+import education from "../data/education";
+import InfoItem from "../components/InfoItem.astro";
+---
+
+<HomeLayout>
+  <Header />
+
+  <main>
+    <h2>Executive Summary</h2>
+    <p>
+      Highly accomplished and strategic retired senior government engineer
+      officer with over 34 years of distinguished service as an IDSE Cadre
+      Officer with the Ministry of Defence. Demonstrated expertise in the
+      strategic planning and execution of large-scale infrastructure projects,
+      including high-altitude heli-pads, naval jetties, and solar power plants.
+      Proven leader in resolving complex engineering, technical, and contractual
+      disputes through arbitration. Seeking a challenging leadership role to
+      leverage extensive experience in policy formulation and multi-state
+      command and control to drive successful project outcomes.
+    </p>
+
+    <h2>Professional Experience</h2>
+    {experience.map((item) => <ExperienceItem data={item} />)}
+
+    <h2>Honors & Awards</h2>
+    {
+      awards.map((award) => (
+        <InfoItem
+          title={award.title}
+          location={award.location}
+          year={award.year}
+          description={award.description}
+        />
+      ))
+    }
+
+    <h2>Technical Expertise & Skills</h2>
+    {
+      skills.map((skillCategory) => (
+        <div>
+          <h3 style="margin: 0.5rem 0;">{skillCategory.category}</h3>
+          <ul class="skill-category-list">
+            {skillCategory.skills.map((skill) => (
+              <li>{skill}</li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+
+    <h2>Education</h2>
+    {
+      education.map((edu) => (
+        <InfoItem
+          title={edu.institution}
+          location={edu.location}
+          year={edu.year}
+          description={edu.degree}
+        />
+      ))
+    }
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Vinay Kumar Agrahari</p>
+  </footer>
+</HomeLayout>
+
+<style>
+  h2 {
+    border-bottom: 2px solid var(--fg-color);
+    padding-bottom: 0.3rem;
+  }
+
+  ul.skill-category-list {
+    column-count: 2;
+
+    @media (max-width: 600px) {
+      column-count: 1;
+    }
+  }
+
+  footer {
+    margin-top: 1.5rem;
+    text-align: center;
+  }
+</style>

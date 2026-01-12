@@ -1,0 +1,72 @@
+---
+import ThemeSwitcher from "../components/ThemeSwitcher.astro";
+import "../style.css";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="author" content="Vinay Kumar Agrahari" />
+    <meta
+      name="description"
+      content="Portfolio website of Vinay Kumar Agrahari"
+    />
+    <meta name="og:image" content="/image/photo.jpg" />
+    <meta name="og:title" content="Vinay Kumar Agrahari" />
+    <meta
+      name="og:description"
+      content="Portfolio website of Vinay Kumar Agrahari"
+    />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
+    />
+
+    <title>Vinay Kumar Agrahari</title>
+    <script is:inline>
+      (function () {
+        const savedTheme = localStorage.getItem("theme") || "dark";
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)",
+        ).matches;
+        const initialTheme =
+          savedTheme === "system"
+            ? prefersDark
+              ? "dark"
+              : "light"
+            : savedTheme;
+        if (initialTheme === "dark") {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      })();
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        window
+          .matchMedia("(prefers-color-scheme: dark)")
+          .addEventListener("change", (e) => {
+            if (localStorage.getItem("theme") === "system") {
+              if (e.matches) {
+                document.documentElement.classList.add("dark");
+              } else {
+                document.documentElement.classList.remove("dark");
+              }
+            }
+          });
+      });
+    </script>
+  </head>
+
+  <body>
+    <ThemeSwitcher />
+    <slot />
+  </body>
+</html>

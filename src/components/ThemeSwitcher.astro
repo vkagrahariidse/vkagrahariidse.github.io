@@ -1,0 +1,57 @@
+<button id="themeButton">
+  <i style="display: none;" class="icons icon-sun"></i>
+  <i class="icons icon-moon"></i>
+</button>
+
+<script>
+  const themeButton = document.getElementById("themeButton")!;
+  const sunIcon = themeButton.querySelector(".icon-sun")! as HTMLElement;
+  const moonIcon = themeButton.querySelector(".icon-moon")! as HTMLElement;
+
+  function updateIcons(theme: string) {
+    if (theme === "dark") {
+      sunIcon.style.display = "inline";
+      moonIcon.style.display = "none";
+    } else {
+      sunIcon.style.display = "none";
+      moonIcon.style.display = "inline";
+    }
+  }
+
+  themeButton.addEventListener("click", () => {
+    const currentTheme = document.documentElement.classList.contains("dark")
+      ? "dark"
+      : "light";
+    let newTheme;
+    if (currentTheme === "dark") {
+      newTheme = "light";
+      document.documentElement.classList.remove("dark");
+    } else {
+      newTheme = "dark";
+      document.documentElement.classList.add("dark");
+    }
+    localStorage.setItem("theme", newTheme);
+    updateIcons(newTheme);
+  });
+
+  const savedTheme = localStorage.getItem("theme") || "dark";
+  updateIcons(savedTheme);
+</script>
+
+<style>
+  #themeButton {
+    position: absolute;
+    top: 0.3rem;
+    right: 0.3rem;
+    border: none;
+    color: var(--fg-color);
+    background: #00000000;
+    cursor: pointer;
+    aspect-ratio: 1;
+    z-index: 1000;
+  }
+
+  #themeButton .icons {
+    font-size: 1.2rem;
+  }
+</style>
